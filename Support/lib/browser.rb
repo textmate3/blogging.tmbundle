@@ -1,4 +1,4 @@
-require "#{ENV['TM_SUPPORT_PATH']}/lib/osx/plist"
+require "#{ENV['TM_SUPPORT_PATH']}/private/plist"
 
 require 'uri'
 
@@ -27,7 +27,7 @@ module Browser
     def favorite
       rec = nil
       open(File.expand_path("~/Library/Preferences/com.apple.LaunchServices.plist")) do |io|
-        rec = OSX::PropertyList.load(io)["LSHandlers"].find { |info| info["LSHandlerURLScheme"] == "http" }
+        rec = Plist.load(io)["LSHandlers"].find { |info| info["LSHandlerURLScheme"] == "http" }
       end
     rescue
     ensure
